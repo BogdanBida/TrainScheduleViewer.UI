@@ -1,0 +1,4 @@
+- Incorrect timer after change direction or date
+  1) disable network or api
+  2) see timer
+  3) change direction in dropdown select or change date
