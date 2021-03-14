@@ -1,0 +1,41 @@
+<div class="schedule-table">
+  <div class="header-item id">ID</div>
+  <div class="header-item">Направление</div>
+  <div class="header-item desk">Отпр.</div>
+  <div class="header-item desk">Приб.</div>
+  <div class="header-item mob">Отпр/Приб</div>
+  <div class="header-item desk">Длительность</div>
+  <div class="header-item mob">Длит.</div>
+  <ng-template ngFor let-row [ngForOf]="data">
+    <div class="id">
+      <a [routerLink]="['/route']" [queryParams]="{ url: row.idHref}">
+        {{row.id}}
+      </a>
+    </div>
+    <div class="direction">
+      <a [routerLink]="['/route']" [queryParams]="{ url: row.idHref}" class="link">
+        {{row.direction}}
+      </a>
+      <span class="span">{{row.direction}}</span>
+    </div>
+    <div class="points desk">
+      <span class="time">{{row.timeFrom}}</span>
+    </div>
+    <div class="points desk">
+      <span class="time">{{row.timeTo}}</span>
+    </div>
+    <div class="points mob">
+      <span class="time">{{row.timeFrom}}</span>
+      <span class="time">{{row.timeTo}}</span>
+    </div>
+    <div>
+      <span class="duration">
+        {{row.duration}}
+      </span>
+    </div>
+  </ng-template>
+  <div class="fullwidth-col">
+    <div class="loader" *ngIf="!data">Загрузка...</div>
+    <span *ngIf="data && !data.length">Данные отсутствуют</span>
+  </div>
+</div>

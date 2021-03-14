@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: whitesmoke;
+  background-image: radial-gradient(circle at center, #413644, #2e2c37);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a, input {
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+}

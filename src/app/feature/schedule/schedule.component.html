@@ -1,0 +1,37 @@
+<header>
+  <select class="select" [(ngModel)]="direction">
+    <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
+  </select>
+  <a class="source-link" [href]="direction + '/' + currentDate">
+    <span>Источник</span>
+    <span class="colon">
+      <span>:</span>
+      <span *ngIf="direction" class="href"> {{direction}}</span>
+    </span>
+  </a>
+</header>
+<div class="current-date" *ngIf="currentDate">
+  <label class="date-picker">
+    <span class="pretext">Дата: {{ currentDate }}</span>
+    <input type="date" [(ngModel)]="currentDate">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+      <g fill="#a8a8a8" fill-rule="nonzero">
+        <path
+          d="M9.14 2.545v3.297h10.991l.001-3.297h2.199v3.297l1.099.001c1.752 0 3.191 1.126 3.292 2.54l.005.158v14.39c0 1.486-1.48 2.697-3.297 2.697H5.843c-1.818 0-3.298-1.211-3.298-2.698V8.54c0-1.487 1.48-2.697 3.298-2.697h1.098l.001-3.298H9.14zm10.991 4.396H9.141v1.1H6.941v-1.1l-1.099.001c-1.154 0-2.108.722-2.192 1.628l-.006.13v14.07c0 .966.989 1.759 2.198 1.759H23.43c1.209 0 2.198-.793 2.198-1.759V8.7c0-.966-.99-1.758-2.198-1.758h-1.1v1.1h-2.198v-1.1zM9.577 18.898v2.994H6.209v-2.994h3.368zm4.495 0v2.994h-3.368v-2.994h3.368zm4.496 0v2.994h-3.367v-2.994h3.367zm4.495 0v2.994h-3.368v-2.994h3.368zM9.577 14.9v2.995H6.209v-2.995h3.368zm4.495 0v2.995h-3.368v-2.995h3.368zm4.496 0v2.995h-3.367v-2.995h3.367zm4.495 0v2.995h-3.368v-2.995h3.368zm-8.99-3.998v2.995h-3.369v-2.995h3.368zm4.495 0v2.995h-3.367v-2.995h3.367zm4.495 0v2.995h-3.368v-2.995h3.368z"
+          transform="translate(-369 -697) translate(57 649) translate(312 48)" />
+      </g>
+    </svg>
+  </label>
+</div>
+<app-table class="table" [data]="info" *ngIf="!isError; else errMessage"></app-table>
+<ng-template #errMessage>
+  <div class="error-message">
+    <img src="assets/images/no-wifi.svg" alt="">
+    <span>
+      Ошибка связи с сервером, отсутствует подклюение.
+    </span>
+    <span>
+      Повторная попытка через {{connectionTimer}} секунд
+    </span>
+  </div>
+</ng-template>

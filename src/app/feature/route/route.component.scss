@@ -1,0 +1,153 @@
+@import "../../../common";
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 101vh;
+  background-image: url("/assets/images/railway.svg");
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: 48px 48px;
+  z-index: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 10px 5px;
+  background-color: #242129;
+  z-index: 3;
+  .back {
+    color: whitesmoke;
+    margin-right: 5px;
+  }
+  .direction {
+    color: gainsboro;
+    text-align: center;
+  }
+}
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  width: fit-content;
+  margin: 10px auto 20px;
+  padding: 0 0 5px;
+  z-index: 2;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 12.5%;
+    content: "";
+    display: block;
+    width: 75%;
+    height: 1px;
+    background-image: linear-gradient(
+      to left,
+      transparent,
+      whitesmoke,
+      transparent
+    );
+    opacity: 0.3;
+  }
+
+  &.first {
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    .station {
+      background-color: rgba(100, 148, 237, 0.25);
+    }
+  }
+  &.last {
+    .station {
+      grid-column: 2;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      background-color: rgba(172, 255, 47, 0.25);
+    }
+    .inWay {
+      text-align: center;
+    }
+  }
+  .parking,
+  .station,
+  .inWay {
+    position: relative;
+    padding: 5px 8px;
+  }
+  .parking {
+    text-align: left;
+  }
+  .station {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 2px 8px #16161650;
+    border-radius: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: whitesmoke;
+    padding: 5px 10px 20px;
+    backdrop-filter: blur(3px);
+    background-color: #f0f0f010;
+    @supports not (
+      (backdrop-filter: blur(3px)) or (-webkit-backdrop-filter: blur(3px))
+    ) {
+      background-color: #808080b0;
+    }
+    text-shadow: 0 2px 4px #000000c0;
+    .arrival {
+      margin-top: 5px;
+    }
+  }
+  .inWay {
+    text-align: right;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 101vh;
+  overflow: hidden;
+  z-index: 1;
+  .train {
+    width: 64px;
+    height: 512px;
+    animation-name: trainAnim;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    transform: translateY(-100%);
+    &.stop-cicle {
+      animation-iteration-count: initial;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .row {
+    width: 100%;
+  }
+}
+
+@keyframes trainAnim {
+  75% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(300%);
+    opacity: 0;
+  }
+}

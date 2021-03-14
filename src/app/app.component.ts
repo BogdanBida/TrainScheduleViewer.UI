@@ -1,4 +1,6 @@
+import { StateService } from './core/state.service';
 import { Component } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'scheduleViewer';
+  constructor(stateService: StateService) {
+    stateService.currentDate = moment().format('DD.MM.YYYY');
+  }
 }

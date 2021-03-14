@@ -1,0 +1,39 @@
+<header>
+  <a class="back" [routerLink]="['..']">Назад</a>
+  <span class="direction">
+    <ng-template [ngIf]="data && data.length" [ngIfElse]="loadingText">
+      Маршрут: {{data[data.length - 1].name}}
+    </ng-template>
+    <ng-template #loadingText>Загрузка...</ng-template>
+  </span>
+</header>
+<div class="loader">
+  <img src="assets/images/train.svg" class="train" [class.stop-cicle]="data">
+</div>
+<div class="row" *ngFor="let row of data; index as i" [class.first]="i === 0" [class.last]="i === (data.length - 1)">
+  <div class="parking" *ngIf="row.parking">
+    <span>Стоянка</span><br>
+    <span>
+      {{row.parking}}
+    </span>
+  </div>
+  <div class="station">
+    <div class="name">
+      <span>
+        {{row.name}}
+      </span>
+    </div>
+    <div class="arrival" *ngIf="row.arrival">
+      <span>Прибытие</span><br>
+      <span>
+        {{row.arrival}}
+      </span>
+    </div>
+  </div>
+  <div class="inWay" *ngIf="row.inWay">
+    <span>В пути</span><br>
+    <span>
+      {{row.inWay}}
+    </span>
+  </div>
+</div>

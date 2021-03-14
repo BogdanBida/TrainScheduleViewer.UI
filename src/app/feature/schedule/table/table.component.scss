@@ -1,0 +1,146 @@
+@import "../../../../common.scss";
+
+:host {
+  display: block;
+}
+
+.schedule-table {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-columns: auto 1fr auto auto 1fr;
+  grid-template-rows: repeat(auto, 1fr);
+  max-width: 100%;
+  width: fit-content;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 3px 20px;
+  gap: 15px 10px;
+  > div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: -1px;
+  }
+  > div:not(.points):not(.header-item) {
+    @include skewBgr(#ffffff10);
+  }
+
+  div.id {
+    padding: 10px 5px;
+    a {
+      color: #e0e0e0;
+      font-size: 0.9em;
+      text-decoration: none;
+      border-bottom: 1px solid greenyellow;
+      letter-spacing: -0.12em;
+      font-style: italic;
+    }
+  }
+
+  .points {
+    padding: 2px;
+    @include skewBgr(#303030a0);
+  }
+
+  .fullwidth-col {
+    grid-column: 1/6;
+    text-align: center;
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+.header-item {
+  text-align: center;
+  @include skewBgr(#f0f0f020);
+  user-select: none;
+}
+
+.time {
+  width: 100%;
+  color: lightgrey;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 5px 8px;
+}
+
+.duration {
+  font-size: 1.5em;
+  width: min-content;
+}
+
+.direction {
+  .link {
+    display: none;
+  }
+}
+
+.mob {
+  display: none !important;
+}
+
+.desk {
+  display: flex !important;
+}
+
+@media (max-width: 768px) {
+  .schedule-table {
+    grid-template-columns: repeat(4, auto);
+    .id {
+      display: none;
+    }
+    .direction {
+      .link {
+        display: block;
+        color: whitesmoke;
+        text-decoration: none;
+      }
+      .span {
+        display: none;
+      }
+    }
+    .header-item {
+      font-size: 12px;
+      padding: 4px;
+    }
+    div {
+      padding: 5px 10px;
+    }
+  }
+
+  span.duration {
+    font-size: 1em;
+  }
+
+  .source-link {
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 512px) {
+  .desk {
+    display: none !important;
+  }
+
+  .mob {
+    display: flex !important;
+  }
+
+  .schedule-table {
+    grid-template-columns: repeat(3, auto);
+    .points.mob {
+      .time {
+        padding-bottom: 0;
+        padding-top: 0;
+      }
+    }
+    .direction {
+      font-size: 1.25em;
+    }
+  }
+}
