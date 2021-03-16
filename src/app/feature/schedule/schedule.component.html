@@ -26,7 +26,7 @@
 <app-table class="table" [data]="info" *ngIf="!isError; else errMessage"></app-table>
 <ng-template #errMessage>
   <div class="error-message">
-    <img src="assets/images/no-wifi.svg" alt="">
+    <img src="assets/images/no-wifi.svg" alt="404">
     <span>
       Ошибка связи с сервером, отсутствует подклюение.
     </span>

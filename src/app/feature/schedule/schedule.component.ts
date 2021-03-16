@@ -34,6 +34,7 @@ export class ScheduleComponent implements OnInit {
 
   public readonly connectionTimerSec = 10;
   public connectionTimer: number;
+  private timerId: number;
 
   constructor(
     private parser: ParserService,
@@ -45,26 +46,26 @@ export class ScheduleComponent implements OnInit {
   }
 
   public parse(): void {
+    this.isError = false;
     this.parser.getSchedule(this.direction + '/' + this.currentDate).pipe(take(1)).subscribe(responce => {
       this.info = responce;
     }, error => {
       console.error(error);
       this.isError = true;
       this.connectionTimer = this.connectionTimerSec;
-      this.startTimer();
-      setTimeout(() => {
-        this.parse();
-      }, this.connectionTimerSec * 1000);
+      this.startTimer(this.parse.bind(this));
     });
   }
 
-  public startTimer(): void {
-    setTimeout(() => {
+  public startTimer(callback: () => void): void {
+    clearInterval(this.timerId);
+    this.timerId = window.setInterval(() => {
+      if (!this.isError) { return; }
       if (this.connectionTimer > 1) {
         this.connectionTimer--;
-        this.startTimer();
       } else {
-        this.isError = false;
+        clearInterval(this.timerId);
+        callback();
       }
     }, 1000);
   }
