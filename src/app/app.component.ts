@@ -9,7 +9,5 @@ import * as moment from 'moment';
 })
 export class AppComponent {
   title = 'scheduleViewer';
-  constructor(stateService: StateService) {
-    stateService.currentDate = moment().format('DD.MM.YYYY');
-  }
+  constructor() { }
 }
