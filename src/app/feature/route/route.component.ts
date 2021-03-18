@@ -1,5 +1,5 @@
 import { Station } from './../../core/models/station';
-import { ParserService } from './../../core/parser.service';
+import { ParserService } from '../../core/services/parser.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
