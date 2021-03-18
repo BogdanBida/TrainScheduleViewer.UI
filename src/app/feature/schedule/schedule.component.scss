@@ -46,7 +46,6 @@ header {
   width: fit-content;
   margin: 0 auto;
   text-align: center;
-  color: darkorange;
   @include skewBgr(#ffffff10);
   .date-picker {
     display: flex;
@@ -57,6 +56,10 @@ header {
     .pretext {
       line-height: 1;
       margin-bottom: -2px;
+      color: cornflowerblue;
+      &.today {
+        color: darkorange;
+      }
     }
     &:hover {
       svg {

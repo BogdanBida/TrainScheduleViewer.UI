@@ -1,8 +1,10 @@
+import { LocalStorageManagerService } from './../../core/services/local-storage-manager.service';
 import { ScheduleItem } from '../../core/models/schedule-item';
-import { StateService } from './../../core/state.service';
-import { ParserService } from './../../core/parser.service';
+import { StateService } from '../../core/services/state.service';
+import { ParserService } from '../../core/services/parser.service';
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-schedule',
@@ -33,12 +35,15 @@ export class ScheduleComponent implements OnInit {
   public isError = false;
 
   public readonly connectionTimerSec = 10;
+  public readonly today = moment().format('DD.MM.YYYY');
   public connectionTimer: number;
   private timerId: number;
+
 
   constructor(
     private parser: ParserService,
     private stateService: StateService,
+    private localStorageManager: LocalStorageManagerService,
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +52,15 @@ export class ScheduleComponent implements OnInit {
 
   public parse(): void {
     this.isError = false;
-    this.parser.getSchedule(this.direction + '/' + this.currentDate).pipe(take(1)).subscribe(responce => {
+
+    const url = this.direction + '/' + this.currentDate;
+    const savedSchedule = this.localStorageManager.getSchedule(url);
+    if (savedSchedule) {
+      this.info = savedSchedule;
+      return;
+    }
+
+    this.parser.getSchedule(url).pipe(take(1)).subscribe(responce => {
       this.info = responce;
     }, error => {
       console.error(error);

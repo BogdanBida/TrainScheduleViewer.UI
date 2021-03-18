@@ -6,13 +6,13 @@
     <span>Источник</span>
     <span class="colon">
       <span>:</span>
-      <span *ngIf="direction" class="href"> {{direction}}</span>
+      <span *ngIf="direction" class="href"> {{direction + '/' + currentDate}}</span>
     </span>
   </a>
 </header>
 <div class="current-date" *ngIf="currentDate">
   <label class="date-picker">
-    <span class="pretext">Дата: {{ currentDate }}</span>
+    <span class="pretext" [class.today]="currentDate === today">Дата: {{ currentDate }}</span>
     <input type="date" [(ngModel)]="currentDate">
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
       <g fill="#a8a8a8" fill-rule="nonzero">
